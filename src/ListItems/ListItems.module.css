@@ -1,0 +1,19 @@
+.itemList{
+    border: black 1px solid;
+    border-radius: 20px;
+    width: 100px;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+}
+
+.itemList:hover{
+    transform: scale(1.05); /* Slightly enlarges the button */
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.2); /* Adds depth */
+    cursor: pointer;
+}
