@@ -28,6 +28,7 @@ function ListItems(props) {
                         };
         
         setItems(i => [...i, newItem]);
+        
         setItemName("");
         setItemDesc("");
         setItemDeadline(new Date().toISOString().slice(0, 16));
@@ -78,7 +79,24 @@ function ListItems(props) {
     return (
     <>
         <h2>To-Do-List</h2>
-        <ul>
+        
+        <div className = {styles.inputBox}>
+            <div className = {styles.inputField}>
+                Task Name: 
+                <input type = "text" value = {itemName} onChange = {handleItemNameChange} placeholder = "Item Name"/>  
+            </div>
+            <div className = {styles.inputField}>
+                Task Description:
+                <input type = "textarea" value = {itemDesc} onChange = {handleItemDescChange} placeholder = "Item Description"/>
+            </div>
+            <div className = {styles.inputField}>
+                Deadline:
+                <input type = "datetime-local" value = {itemDeadline} onChange = {handleItemDeadlineChange} placeholder = "Item Deadline"/>
+            </div>
+                <button onClick = {handleAddItem}>Add Item</button>
+        </div>
+
+        <div>
             {
             items.map((item, index) => 
                 <div className = {styles.itemList} style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} key = {index} onClick={(event) => handleComponentChange(index, event)}>
@@ -86,11 +104,7 @@ function ListItems(props) {
                         {item.deadline}
                 </div>)
             }
-        </ul>
-        <input type = "text" value = {itemName} onChange = {handleItemNameChange} placeholder = "Item Name"/>  
-        <input type = "text" value = {itemDesc} onChange = {handleItemDescChange} placeholder = "Item Description"/>
-        <input type = "datetime-local" value = {itemDeadline} onChange = {handleItemDeadlineChange} placeholder = "Item Deadline"/>
-        <button onClick = {handleAddItem}>Add Item</button>
+        </div>
     </>
 
     )
