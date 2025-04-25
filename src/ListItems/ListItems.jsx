@@ -1,15 +1,18 @@
 import { useState } from "react";
 import styles from './ListItems.module.css'
+import InputItemBox from '../InputItemBox/InputItemBox.jsx'
 
 function ListItems(props) {
     
     //Add the states for each item
+    const [categories, setCategories] = useState(props.items || []);
     const [items, setItems] = useState(props.items || []);
     const [itemName, setItemName] = useState(props.itemName || "");
     const [itemDesc, setItemDesc] = useState(props.itemDesc || "");
     const [itemDeadline, setItemDeadline] = useState(props.deadline || new Date().toISOString().slice(0, 16));
     const [itemInProgress, setItemInProgress] = useState(false);
     const [itemIsCompleted, setItemIsCompleted] = useState(false);
+    const [isInput, setIsInput] = useState(false);
 
     function handleAddItem(){
         //add for each section, the state variables are temporary, to be added to the actual array
@@ -36,20 +39,12 @@ function ListItems(props) {
         setItemIsCompleted(false);
     }
 
-    function handleRemoveItem(index){
-        setItems(i => i.filter((_, ind) => ind !== index));
-    }
-
     function handleItemNameChange(event){
         setItemName(event.target.value);
     }
 
     function handleItemDescChange(event){
         setItemDesc(event.target.value);
-    }
-
-    function handleItemDeadlineChange(event){
-        setItemDeadline(event.target.value);
     }
 
     function handleComponentChange(index, event){
@@ -73,30 +68,36 @@ function ListItems(props) {
             
     }
 
-  
+    function handleItemDeadlineChange(event){
+        setItemDeadline(event.target.value);
+    }
+
+    function handleRemoveItem(index){
+        setItems(i => i.filter((_, ind) => ind !== index));
+    }
+
+    function handleIsInputChange(){
+        setIsInput(i => !i);
+    }
+
+
 
 
     return (
     <>
         <h2>To-Do-List</h2>
         
-        <div className = {styles.inputBox}>
-            <div className = {styles.inputField}>
-                Task Name: 
-                <input type = "text" value = {itemName} onChange = {handleItemNameChange} placeholder = "Item Name"/>  
-            </div>
-            <div className = {styles.inputField}>
-                Task Description:
-                <input type = "textarea" value = {itemDesc} onChange = {handleItemDescChange} placeholder = "Item Description"/>
-            </div>
-            <div className = {styles.inputField}>
-                Deadline:
-                <input type = "datetime-local" value = {itemDeadline} onChange = {handleItemDeadlineChange} placeholder = "Item Deadline"/>
-            </div>
-                <button onClick = {handleAddItem}>Add Item</button>
-        </div>
+        <InputItemBox isInput = {isInput}
+            itemName = {itemName} 
+            handleItemNameChange = {handleItemNameChange} 
+            itemDesc = {itemDesc} 
+            handleItemDescChange = {handleItemDescChange} 
+            itemDeadline = {itemDeadline} 
+            handleItemDeadlineChange = {handleItemDeadlineChange} 
+            handleAddItem = {handleAddItem} />
 
-        <div>
+        <div className = {styles.listBox}>
+            <button onClick = {handleIsInputChange}>+</button>
             {
             items.map((item, index) => 
                 <div className = {styles.itemList} style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} key = {index} onClick={(event) => handleComponentChange(index, event)}>
