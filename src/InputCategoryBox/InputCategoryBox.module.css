@@ -1,27 +1,14 @@
-/* box where you put the input */
-.inputBox{
-    font-family: Oswald, sans-serif;
+.categoryBox{
+    border: solid black;
     display: flex;
     flex-direction: column;
-    border: black solid;
-    padding: 20px;
-    height: 400px;  
-    width: 300px;
+    padding: 5%;
     position: relative;
     align-items: center;
     justify-content: center;
 }
 
-/* input fields container */
-.inputField{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 75%;
-}
-
-/* actual input fields */
-.inputField input{
+input{
     padding: 6px 12px;
     font-size: 16px;
     font-weight: 400;

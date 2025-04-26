@@ -1,6 +1,7 @@
 import { useState } from "react";
-import styles from './ListItems.module.css'
+import styles from './MainPage.module.css'
 import InputItemBox from '../InputItemBox/InputItemBox.jsx'
+import InputCategoryBox from "../InputCategoryBox/InputCategoryBox.jsx";
 
 function ListItems(props) {
     
@@ -13,6 +14,8 @@ function ListItems(props) {
     const [itemInProgress, setItemInProgress] = useState(false);
     const [itemIsCompleted, setItemIsCompleted] = useState(false);
     const [isInput, setIsInput] = useState(false);
+    const [isCategory, setIsCategory] = useState(false);
+
 
     function handleAddItem(){
         //add for each section, the state variables are temporary, to be added to the actual array
@@ -37,6 +40,15 @@ function ListItems(props) {
         setItemDeadline(new Date().toISOString().slice(0, 16));
         setItemInProgress(false);
         setItemIsCompleted(false);
+    }
+
+    function handleAddCategory(newCategory){
+        if(newCategory != ""){
+            setCategories(c => [...c, newCategory]);
+            console.log(categories);
+        } else {
+            alert("New Category Cannot be Empty");
+        }
     }
 
     function handleItemNameChange(event){
@@ -80,6 +92,10 @@ function ListItems(props) {
         setIsInput(i => !i);
     }
 
+    function handleIsCategoryChange(){
+        setIsCategory(i => !i);
+    }
+
 
 
 
@@ -95,6 +111,10 @@ function ListItems(props) {
             itemDeadline = {itemDeadline} 
             handleItemDeadlineChange = {handleItemDeadlineChange} 
             handleAddItem = {handleAddItem} />
+
+        <InputCategoryBox
+            handleAddCategory = {handleAddCategory}
+            />
 
         <div className = {styles.listBox}>
             <button onClick = {handleIsInputChange}>+</button>

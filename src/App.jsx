@@ -1,5 +1,5 @@
-import ListItemsInput from './ListItems/ListItems.jsx'
-import ListItems from './ListItems/ListItems.jsx'
+import ListItemsInput from './MainPage/MainPage.jsx'
+import ListItems from './MainPage/MainPage.jsx'
 
 function App() {
 
