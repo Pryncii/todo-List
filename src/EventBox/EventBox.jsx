@@ -14,18 +14,20 @@ function EventBox({
         { events &&
             events.map((event, index) =>  
                 <div className = {styles.listBox} key = {index}>
-                    {event.name}
-                    <button className= {styles.categorybutton} onClick = {handleIsInputChange}>+</button>
-                    { items &&
-                        items.map((item, index) => 
-                        <div className = {styles.itemList} 
-                        style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} 
-                        key = {index} onClick={(event) => handleComponentChange(index, event)}>
-                                {item.name} <br/>
-                                {item.deadline}
-                        </div>)
-                    }
-                </div> ) 
+                    <div className = {styles.listBoxLabel}>
+                    {event.name} <button className= {styles.categorybutton} onClick = {handleIsInputChange}>+</button> <br/>
+                    {event.deadline}
+                    </div> 
+                        { items &&
+                            items.map((item, index) => 
+                            <div className = {styles.itemList} 
+                            style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} 
+                            key = {index} onClick={(event) => handleComponentChange(index, event)}>
+                                    {item.name} <br/>
+                                    {item.deadline}
+                            </div>)
+                        }
+                </div>) 
         }
             </>
 

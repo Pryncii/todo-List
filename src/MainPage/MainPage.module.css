@@ -14,7 +14,7 @@
 }
 
 .noteBox {
-    height: 90%;
+    min-height: 90%;
     width: 90%;
     background-color: whitesmoke;
     border: solid 10px #91e2ff;
@@ -23,6 +23,7 @@
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center children horizontally */
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    overflow-y: auto; 
 }
 
 .categorybutton{

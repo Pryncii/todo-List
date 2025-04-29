@@ -43,6 +43,7 @@ function ListItems(props) {
         setItemDeadline(new Date().toISOString().slice(0, 16));
         setItemInProgress(false);
         setItemIsCompleted(false);
+        setIsInput(false);
     }
 
     function handleAddEvent(event){
@@ -60,7 +61,7 @@ function ListItems(props) {
                     hour12: true, // Use 12-hour clock (AM/PM)
                     });
             } else {
-                formatted = "N/A"
+                formatted = "No Deadline"
             }
 
             const newEvent = {
