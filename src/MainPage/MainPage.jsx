@@ -31,7 +31,8 @@ function ListItems(props) {
           });
         const newItem = {name: itemName,
                          desc: itemDesc,
-                         deadline: formatted, 
+                         deadline: formatted,
+                         event: eventName,
                          inProgress: itemInProgress,
                          isCompleted: itemIsCompleted
                         };
@@ -123,8 +124,10 @@ function ListItems(props) {
         setItems(i => i.filter((_, ind) => ind !== index));
     }
 
-    function handleIsInputChange(){
+    function handleIsInputChange(nameEvent){
         setIsInput(i => !i);
+        setEventName(e => nameEvent);
+        console.log(eventName);
     }
 
     function handleIsEventChange(){
@@ -163,6 +166,7 @@ function ListItems(props) {
                     events = {events}
                     handleComponentChange = {handleComponentChange}
                     handleIsInputChange = {handleIsInputChange}
+                    setEventName={setEventName}
                     />
 
                 
