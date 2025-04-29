@@ -1,12 +1,13 @@
 
-import styles from "./ListBox.module.css"
+import styles from "./ItemBox.module.css"
 
-function ListBox({items,
-                    handleComponentChange
+function ItemBox({items,
+                    handleComponentChange,
+                    eventName
 }){
     return(<>
         { items &&
-            items.filter(item => item.event === event.name)
+            items.filter(item => item.event === eventName)
             .map((item, index) => 
             <div className = {styles.itemList} 
             style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} 
@@ -18,4 +19,4 @@ function ListBox({items,
     </>)
 }
 
-export default ListBox
+export default ItemBox

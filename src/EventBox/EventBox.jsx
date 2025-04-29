@@ -1,5 +1,6 @@
 import {useState} from "react"
 import styles from "./EventBox.module.css"
+import ListBox from "../ItemBox/ItemBox"
 
 function EventBox({
     handleIsInputChange,
@@ -18,16 +19,10 @@ function EventBox({
                     {event.name} <button className= {styles.categorybutton} onClick = {() => handleIsInputChange(event.name)}>+</button> <br/>
                     {event.deadline}
                     </div> 
-                        { items &&
-                            items.filter(item => item.event === event.name)
-                            .map((item, index) => 
-                            <div className = {styles.itemList} 
-                            style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} 
-                            key = {index} onClick={(event) => handleComponentChange(index, event)}>
-                                    {item.name} <br/>
-                                    {item.deadline}
-                            </div>)
-                        }
+                    <ListBox 
+                        items = {items}
+                        handleComponentChange = {handleComponentChange}
+                        eventName={event.name} />
                 </div>) 
         }
             </>
