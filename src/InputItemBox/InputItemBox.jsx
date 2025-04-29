@@ -18,18 +18,20 @@ function InputItemBox({
         { 
         isInput &&
             <div className = {styles.inputBox}>
+                <h2>Input Task</h2>
                 <div className = {styles.inputField}>
                     Task Name: 
                     <input type = "text" value = {itemName} onChange = {handleItemNameChange} placeholder = "Item Name"/>  
                 </div>
                 <div className = {styles.inputField}>
                     Task Description:
-                    <input type = "textarea" value = {itemDesc} onChange = {handleItemDescChange} placeholder = "Item Description"/>
+                    <textarea value = {itemDesc} onChange = {handleItemDescChange} placeholder = "Item Description"/>
                 </div>
                 <div className = {styles.inputField}>
                     Deadline:
                     <input type = "datetime-local" value = {itemDeadline} onChange = {handleItemDeadlineChange} placeholder = "Item Deadline"/>
                 </div>
+                    <br/>
                     <button onClick = {handleAddItem}>Add Item</button>
             </div>
         }

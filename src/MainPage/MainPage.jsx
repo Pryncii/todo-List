@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styles from './MainPage.module.css'
 import InputItemBox from '../InputItemBox/InputItemBox.jsx'
-import InputCategoryBox from "../InputCategoryBox/InputCategoryBox.jsx";
+import InputEventBox from "../InputEventBox/InputEventBox.jsx";
+import EventBox from "../EventBox/EventBox.jsx"
 
 function ListItems(props) {
     
     //Add the states for each item
-    const [categories, setCategories] = useState(props.items || []);
+    const [events, setEvents] = useState(props.items || []);
+    const [eventName, setEventName] = useState (props.eventName || "");
+    const [eventDeadline, setEventDeadline] = useState (props.Deadline|| "");
     const [items, setItems] = useState(props.items || []);
     const [itemName, setItemName] = useState(props.itemName || "");
     const [itemDesc, setItemDesc] = useState(props.itemDesc || "");
@@ -14,7 +17,7 @@ function ListItems(props) {
     const [itemInProgress, setItemInProgress] = useState(false);
     const [itemIsCompleted, setItemIsCompleted] = useState(false);
     const [isInput, setIsInput] = useState(false);
-    const [isCategory, setIsCategory] = useState(false);
+    const [isEvent, setIsEvent] = useState(false);
 
 
     function handleAddItem(){
@@ -42,13 +45,44 @@ function ListItems(props) {
         setItemIsCompleted(false);
     }
 
-    function handleAddCategory(newCategory){
-        if(newCategory != ""){
-            setCategories(c => [...c, newCategory]);
-            console.log(categories);
+    function handleAddEvent(event){
+
+        let formatted;
+
+        if(eventName != ""){
+
+            if(eventDeadline){
+                formatted = new Date(eventDeadline).toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true, // Use 12-hour clock (AM/PM)
+                    });
+            } else {
+                formatted = "N/A"
+            }
+
+            const newEvent = {
+                name: eventName,
+                deadline: formatted
+            }
+            setEvents(c => [...c, newEvent]);
+            console.log(events);
+            setEventName("");
+            setEventDeadline("");
+            setIsEvent(false);
         } else {
-            alert("New Category Cannot be Empty");
+            alert("Missing Event Name");
         }
+    }
+
+    function handleEventNameChange(event){
+        setEventName(event.target.value);
+    }
+
+    function handleEventDeadlineChange(event){
+        setEventDeadline(event.target.value);
     }
 
     function handleItemNameChange(event){
@@ -92,8 +126,8 @@ function ListItems(props) {
         setIsInput(i => !i);
     }
 
-    function handleIsCategoryChange(){
-        setIsCategory(i => !i);
+    function handleIsEventChange(){
+        setIsEvent(i => !i);
     }
 
 
@@ -101,30 +135,37 @@ function ListItems(props) {
 
     return (
     <>
-        <h2>To-Do-List</h2>
-        
-        <InputItemBox isInput = {isInput}
-            itemName = {itemName} 
-            handleItemNameChange = {handleItemNameChange} 
-            itemDesc = {itemDesc} 
-            handleItemDescChange = {handleItemDescChange} 
-            itemDeadline = {itemDeadline} 
-            handleItemDeadlineChange = {handleItemDeadlineChange} 
-            handleAddItem = {handleAddItem} />
+        <div className = {styles.mainPad}>
+            <div className = {styles.noteBox}>
+                <h2>To-Do-List <button className={styles.categorybutton} onClick = {handleIsEventChange}>+</button></h2> 
+                
+                <InputItemBox isInput = {isInput}
+                    itemName = {itemName} 
+                    handleItemNameChange = {handleItemNameChange} 
+                    itemDesc = {itemDesc} 
+                    handleItemDescChange = {handleItemDescChange} 
+                    itemDeadline = {itemDeadline} 
+                    handleItemDeadlineChange = {handleItemDeadlineChange} 
+                    handleAddItem = {handleAddItem} />
 
-        <InputCategoryBox
-            handleAddCategory = {handleAddCategory}
-            />
+                <InputEventBox
+                    eventName = {eventName}
+                    handleEventNameChange = {handleEventNameChange}
+                    eventDeadline = {eventDeadline}
+                    handleEventDeadlineChange = {handleEventDeadlineChange}
+                    isEvent={isEvent}
+                    handleAddEvent = {handleAddEvent}
+                    />
 
-        <div className = {styles.listBox}>
-            <button onClick = {handleIsInputChange}>+</button>
-            {
-            items.map((item, index) => 
-                <div className = {styles.itemList} style = {{backgroundcolor: item.inProgress ? "#f5f05d" : item.isCompleted ? "#75c971" : "white"}} key = {index} onClick={(event) => handleComponentChange(index, event)}>
-                        {item.name} <br/>
-                        {item.deadline}
-                </div>)
-            }
+                <EventBox
+                    items = {items}
+                    events = {events}
+                    handleComponentChange = {handleComponentChange}
+                    handleIsInputChange = {handleIsInputChange}
+                    />
+
+                
+            </div>
         </div>
     </>
 
