@@ -1,19 +1,52 @@
-const {MongoClient} = require ("mongodb")
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+
 require("dotenv").config({path: "./config.env"})
+const {eventModel} = require("./data.cjs")
+const {itemModel} = require("./data.cjs")
+
+const app = express();
+const port = 3000;
+app.use(cors());
+app.use(express.json());
 
 async function main() {
     const Db = process.env.ATLAS_URI;
-    const client = new MongoClient(Db);
 
-    try{
-        await client.connect();
-        const collections = await client.db("To-do-list").collections()
-        collections.forEach((collection) => console.log(collection.s.namespace.collection))
-    } catch(e) {
-        console.error(e);
-    } finally {
-        await client.close()
-    }
+    const connectDB = async () => {
+        try {
+            const conn = await mongoose.connect (Db);
+            console.log('MongoDB connected:')
+        } catch (error) {
+            console.error(error);
+            process.exit(1);
+        }
+    };
+
+    await connectDB();
 }
 
-main()
+main();
+
+app.get('/', async (req, res) => {
+    try {
+        const events = await eventModel.find();
+        const items = await itemModel.find();
+        console.log(events);
+        console.log(items);
+
+        res.json({
+            events,
+            items
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+app.listen(port, () => {
+    console.log('app is running');
+})

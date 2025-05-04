@@ -1,0 +1,26 @@
+[
+    {
+      "name": "Create Project Plan",
+      "desc": "Draft the initial project plan and timeline.",
+      "deadline": "2025-05-08T12:00:00.000Z",
+      "event": "Project Kickoff",
+      "inProgress": true,
+      "isCompleted": false
+    },
+    {
+      "name": "Prepare Presentation",
+      "desc": "Prepare slides for the team meeting.",
+      "deadline": "2025-05-14T16:00:00.000Z",
+      "event": "Team Meeting",
+      "inProgress": false,
+      "isCompleted": true
+    },
+    {
+      "name": "Follow-up Emails",
+      "desc": "Send follow-up emails to stakeholders.",
+      "deadline": "2025-05-16T09:00:00.000Z",
+      "event": "Team Meeting",
+      "inProgress": false,
+      "isCompleted": false
+    }
+  ]

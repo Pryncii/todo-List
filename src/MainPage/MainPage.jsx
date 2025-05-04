@@ -4,7 +4,7 @@ import InputItemBox from '../InputItemBox/InputItemBox.jsx'
 import InputEventBox from "../InputEventBox/InputEventBox.jsx";
 import EventBox from "../EventBox/EventBox.jsx"
 
-function ListItems(props) {
+function MainPage(props) {
     
     //Add the states for each item
     const [events, setEvents] = useState(props.items || []);
@@ -177,4 +177,4 @@ function ListItems(props) {
     )
 }
 
-export default ListItems;
+export default MainPage;
