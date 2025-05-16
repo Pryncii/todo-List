@@ -27,7 +27,7 @@ function App() {
   return (
     <>
 
-      <MainPage />
+    <MainPage data = {data} />
     </>
   )
 }

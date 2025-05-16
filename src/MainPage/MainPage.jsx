@@ -134,14 +134,16 @@ function MainPage(props) {
         setIsEvent(i => !i);
     }
 
-
+    function printData(){
+        console.log(props.data);
+    }
 
 
     return (
     <>
         <div className = {styles.mainPad}>
             <div className = {styles.noteBox}>
-                <h2>To-Do-List <button className={styles.categorybutton} onClick = {handleIsEventChange}>+</button></h2> 
+                <h2>To-Do-List <button className={styles.categorybutton} onClick = {printData}>+</button></h2> 
                 
                 <InputItemBox isInput = {isInput}
                     itemName = {itemName} 
